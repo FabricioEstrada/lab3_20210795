@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista De Recetas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Lista de Recetas</h2>
+    <div><a class="btn btn-success" th:href="@{'/receta/crear'}">Crear Nueva Receta</a></div>
+    <!-- Alerta -->
+    <div th:if="${mensaje}" th:class="${'alert ' + alertClass}" role="alert">
+        <span th:text="${mensaje}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Tiempo De Preparacion</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="receta, info :${listaRecetas}">
+            <td th:text="${info.index + 1}"></td>
+            <td th:text="${receta.nombre}"></td>
+            <td th:text="${receta.dificultad}"></td>
+            <td> <a class="btn btn-success" th:href="@{'/receta/ver_detalles?idReceta=' + ${receta.idReceta}}">Ver Detalles</a></td>
+            <td> <a class="btn btn-success" th:href="@{'/receta/editar?idReceta=' + ${receta.idReceta}}">Editar</a></td>
+            <td> <a class="btn btn-danger" th:href="@{'/receta/borrar?idReceta=' + ${receta.idReceta}}">Borrar</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
